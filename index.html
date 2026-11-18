@@ -325,7 +325,7 @@ function buildText(attached){
   if($("remark").value.trim()) L.push("Remarks: " + $("remark").value.trim());
   L.push("Sharten: maan li (" + nowStamp() + ")");
   if(state.files.length) L.push("Photos: " + state.files.length + (attached ? " (saath mein attached)" : " (chat mein isi order mein bhej raha/rahi hoon)"));
-  return L.join("\n");
+  return L.join("\n\n");
 }
 function waLink(text){ return "https://wa.me/" + CONFIG.BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(text) }
 
