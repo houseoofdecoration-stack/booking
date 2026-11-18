@@ -326,7 +326,7 @@ function buildText(attached){
   if(state.mapsLink) L.push("Location: " + state.mapsLink);
   if($("balance").value.trim()) L.push("Balance amount: ₹" + $("balance").value.trim());
   if($("remark").value.trim()) L.push("Remarks: " + $("remark").value.trim());
-  L.push("Sharten: maan li (" + nowStamp() + ")");
+  L.push("Terms: Accepted ✅ (" + nowStamp() + ")");
   if(state.files.length) L.push("Photos: " + state.files.length + (attached ? " (saath mein attached)" : " (chat mein isi order mein bhej raha/rahi hoon)"));
   return L.join("\n\n");
 }
