@@ -370,6 +370,7 @@ function buildText(attached){
   L.push("Team aane ka slot: " + state.slot);
   if($("child").value.trim()) L.push("Janam din / function: " + $("child").value.trim());
   if($("age").value.trim()) L.push("Age: " + $("age").value.trim() + " saal");
+  state.files.forEach(function(it,i){ if(it.note.trim()) L.push("Photo " + (i+1) + " mein change: " + it.note.trim()) });
   if($("addr").value.trim()) L.push("Address: " + $("addr").value.trim());
   if(state.mapsLink) L.push("Location: " + state.mapsLink);
   if($("balance").value.trim()) L.push("Balance amount: ₹" + $("balance").value.trim());
