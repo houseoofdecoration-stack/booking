@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Decoration Booking | House of Balloons</title>
+<script>
+window.addEventListener("error", function(e){
+  if(!document.body || !e.message || /^Script error/i.test(e.message)) return;
+  var d = document.createElement("div");
+  d.style.cssText = "position:fixed;left:8px;right:8px;top:8px;z-index:99;background:#b3261e;color:#fff;padding:10px;border-radius:10px;font:14px sans-serif";
+  d.textContent = "Dikkat: " + e.message + " (line " + (e.lineno || "?") + ")";
+  document.body.appendChild(d);
+});
+</script>
+<style>
+:root{--bg:#fff6ee;--ink:#2e1740;--muted:#6f5a7e;--line:#e6d3e4;--card:#ffffff;--accent:#b4146b;--accent-ink:#ffffff;--ok:#0f766e;--chip:#f6e8f3;--wa:#1faa59}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Roboto,"Noto Sans Devanagari",system-ui,sans-serif;font-size:17px;line-height:1.45}
+.wrap{max-width:520px;margin:0 auto;padding:20px 16px 120px}
+h1{font-size:26px;line-height:1.2;margin:8px 0 6px}
+.sub{color:var(--muted);margin:0 0 20px}
+.field{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px}
+.field.bad{border-color:#b3261e;box-shadow:0 0 0 2px #f3c4c0}
+label,.lbl{display:block;font-weight:600;margin-bottom:8px}
+.req{color:#b3261e;font-weight:700}
+.hint{display:block;font-weight:400;color:var(--muted);font-size:14px;margin-top:2px}
+input[type=text],input[type=tel],input[type=number],input[type=date],input[type=time],input[type=search],textarea{width:100%;font:inherit;color:inherit;padding:13px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+textarea{min-height:84px;resize:vertical}
+input:focus,textarea:focus,button:focus-visible{outline:3px solid #e9a6cc;outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;padding:11px 15px;border-radius:999px;border:1.5px solid var(--line);background:var(--chip);color:var(--ink);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.big{width:100%;font:inherit;font-weight:600;padding:15px;border-radius:12px;border:2px dashed var(--accent);background:#fff;color:var(--accent);cursor:pointer}
+.big.wa{border:2px solid var(--wa);color:#0b6b36;background:#effaf3;margin-top:10px}
+.big.done{border-style:solid;border-color:var(--ok);color:var(--ok);background:#effaf8}
+.big.sec{border:1.5px solid var(--line);color:var(--muted);font-weight:600;font-size:15px;padding:11px;background:#fff}
+[hidden]{display:none!important}
+#photoWrap{display:block;position:relative;text-align:center;cursor:pointer}
+#photoWrap input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:0}
+.note{font-size:14px;color:var(--muted);margin-top:8px}
+.note a{color:var(--ok)}
+.or{text-align:center;color:var(--muted);font-size:14px;margin:12px 0 2px}
+#thumbs{display:grid;gap:10px;margin-top:10px}
+.pcard{display:flex;gap:10px;align-items:stretch;border:1px solid var(--line);border-radius:12px;padding:8px;background:#fff}
+.pimg{position:relative;flex:0 0 96px;height:96px;border-radius:10px;overflow:hidden;background:#eee}
+.pimg img{width:100%;height:100%;object-fit:cover;display:block}
+.pimg button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(46,23,64,.85);color:#fff;font-size:16px;line-height:1;cursor:pointer}
+.pnote{flex:1;min-width:0;display:flex;flex-direction:column}
+.pnote b{font-size:14px;margin-bottom:4px}
+.pnote textarea{flex:1;min-height:64px;padding:8px 10px;font-size:15px}
+.terms{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;font-size:15px}
+.terms.bad{border-color:#b3261e;box-shadow:0 0 0 2px #f3c4c0}
+.terms h2{font-size:17px;margin:0 0 8px}
+.terms ul{margin:0;padding-left:20px}
+.terms li{margin-bottom:8px}
+.agree{display:flex;gap:10px;align-items:flex-start;margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-weight:600;cursor:pointer}
+.agree input{width:24px;height:24px;flex:0 0 24px;margin:0;accent-color:var(--accent)}
+.ext{background:#fff3c4;border:1px solid #f0d56a;border-radius:14px;padding:14px;margin-bottom:12px;font-size:15px}
+#toast{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:40;max-width:496px;margin:0 auto;background:#b3261e;color:#fff;border-radius:12px;padding:12px 14px;font-size:15px;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.err{color:#b3261e;font-size:14px;margin-top:6px;display:none}
+.bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 70%,rgba(255,246,238,0))}
+.bar button{display:block;width:100%;max-width:520px;margin:0 auto;font:inherit;font-weight:700;font-size:18px;padding:16px;border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.bar button:disabled{opacity:.6}
+#thanks{display:none;text-align:center;padding-top:40px}
+#thanks a,#thanks #shareBtn{display:inline-block;margin-top:16px;padding:15px 22px;border-radius:12px;background:var(--ok);color:#fff;text-decoration:none;font-weight:700}
+#thanks #shareBtn{border:0;font:inherit;font-weight:700;cursor:pointer}
+#thanks #textOnly{background:none;color:var(--muted);text-decoration:underline;font-weight:500;padding:10px;margin-top:8px}
+#locRemind{display:none;background:#fff3c4;border:1px solid #f0d56a;border-radius:14px;padding:14px;margin:18px 0 0;text-align:left;font-size:15px}
+#mapOv{position:fixed;inset:0;z-index:50;background:#fff;display:flex;flex-direction:column}
+.mtop{display:flex;gap:8px;padding:10px;padding-top:calc(10px + env(safe-area-inset-top,0px));background:#fff;border-bottom:1px solid var(--line)}
+.mtop input{flex:1;min-width:0;font:inherit;padding:11px;border:1.5px solid var(--line);border-radius:10px}
+.mtop button{font:inherit;font-weight:600;padding:0 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--chip);color:var(--ink);cursor:pointer}
+#mapBox{flex:1;position:relative}
+#map{position:absolute;inset:0}
+#pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);font-size:38px;line-height:1;pointer-events:none;z-index:1000}
+.mbot{padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--line);display:grid;gap:8px}
+.mbot .hintline{font-size:14px;color:var(--muted);text-align:center}
+.mbot button{font:inherit;font-weight:700;padding:14px;border-radius:12px;border:0;cursor:pointer}
+#mapOk{background:var(--accent);color:#fff;font-size:18px}
+#mapMe{background:var(--chip);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div id="formView">
+  <h1>Decoration Booking</h1>
+  <p class="sub">2 minute ka kaam hai. Jahan <span class="req">*</span> laga hai wo bharna zaroori hai.</p>
+
+  <div class="field" id="f_alt"><label for="alt">Doosra number <span class="req">*</span><span class="hint">Event wale din jo number uthaya jayega (ghar ka koi doosra member)</span></label><input id="alt" type="tel" inputmode="tel" autocomplete="off" placeholder="Jaise: 91234 56789"><div class="err" id="e_alt">Sahi 10 digit ka number likhein</div></div>
+
+  <div class="field" id="f_date"><label for="date">Event ki date <span class="req">*</span></label><input id="date" type="date"><div class="err" id="e_date">Date chunein</div></div>
+
+  <div class="field" id="f_slot"><span class="lbl">Hamari team kitne baje aaye? <span class="req">*</span><span class="hint">Decoration shuru karne ka slot chunein</span></span>
+    <div class="chips" data-single="slot">
+      <button type="button" class="chip" aria-pressed="false">Subah 8 se 10 ke beech</button>
+      <button type="button" class="chip" aria-pressed="false">10 se 12 ke beech</button>
+      <button type="button" class="chip" aria-pressed="false">12 se 2 ke beech</button>
+      <button type="button" class="chip" aria-pressed="false">2 se 4 ke beech</button>
+      <button type="button" class="chip" aria-pressed="false">4 se 6 ke beech</button>
+      <button type="button" class="chip" aria-pressed="false">6 se 8 ke beech (extra ₹200)</button>
+    </div><div class="err" id="e_slot">Slot chunein</div></div>
+
+  <div class="field"><span class="lbl">Jo decoration chahiye uski photo<span class="hint">Ek photo kaafi hai. Kuch alag dikhana ho tabhi doosri photo jodein. Photo ke saamne likh sakte hain ki usme kya badalna hai</span></span>
+    <label class="big" id="photoWrap"><span id="photoBtn">🖼️ Photo chunein</span><input id="photos" type="file" accept="image/*" multiple></label>
+    <div id="thumbs"></div>
+    <div id="descWrap" style="margin-top:14px"><label for="desc">Photo nahi hai? Yahan likhein ki kaisi decoration chahiye</label>
+    <textarea id="desc"></textarea></div></div>
+
+  <div class="field"><span class="lbl">Decoration kiske liye hai?<span class="hint">Naam aur age decoration par likhi jayegi. Zaroori nahi hai</span></span>
+    <label for="child">Unka naam</label><input id="child" type="text" autocomplete="off">
+    <label for="age" style="margin-top:12px">Age (saal)</label><input id="age" type="number" inputmode="numeric" min="0" max="120"></div>
+
+  <div class="field" id="f_loc"><span class="lbl">Location <span class="req">*</span><span class="hint">Neeche ke teen tareeke mein se koi ek chunein. Ya sirf address likh dein</span></span>
+    <button type="button" class="big" id="locBtn">📍 Meri current location lagayein</button>
+    <button type="button" class="big wa" id="waLocBtn">💬 WhatsApp se current location bhejein</button>
+    <div class="note" id="waLocHelp" hidden><b>Kaise bhejein:</b> WhatsApp khulega. Usme <b>📎 (attach) → Location → "Send your current location"</b> dabayein. Bhejne ke baad yahan wapas aakar neeche tick lagayein.</div>
+    <label class="agree" for="locWa" id="locWaRow" style="border-top:0;padding-top:8px;margin-top:4px" hidden><input id="locWa" type="checkbox"><span>Maine WhatsApp par apni location bhej di hai (ya bhej dungi)</span></label>
+    <div class="or">ya</div>
+    <label for="locLink" style="font-weight:600">Google Maps / WhatsApp location ka link paste karein</label>
+    <input id="locLink" type="text" inputmode="url" autocomplete="off" placeholder="https://maps.app.goo.gl/...">
+    <button type="button" id="locChange" class="chip" style="margin-top:10px">🗺️ Ya map par jagah chunein</button>
+    <div class="note" id="locNote"></div>
+    <label for="addr" style="margin-top:14px">Poora address<span class="hint">Flat / floor / landmark ke saath. Current location lagane par address apne aap bhar jata hai, aap badal sakte hain</span></label>
+    <textarea id="addr"></textarea>
+    <div class="err" id="e_loc">Location lagayein ya poora address likhein</div></div>
+
+  <div class="field"><label for="balance">Balance amount (₹)<span class="hint">Event wale din jo baaki rakam deni hai</span></label><input id="balance" type="number" inputmode="numeric" min="0" placeholder="Jaise: 2000"></div>
+
+  <div class="field"><label for="remark">Extra remarks (optional)</label><textarea id="remark"></textarea></div>
+
+  <div class="terms" id="f_agree">
+    <h2>Zaroori sharten <span class="req">*</span></h2>
+    <ul>
+      <li>Decoration का पूरा setup Customer के लिए Rent पर होता है। Balloons को छोड़कर बाकी सभी सामान हमारी Team अगले दिन सुबह collect करेगी।</li>
+      <li>यदि Program किसी Restaurant / Café / Banquet / Venue में है, तो सामान को Pickup होने तक सही एवं सुरक्षित रखना Customer की जिम्मेदारी होगी।</li>
+      <li>किसी भी सामान के Damage या Loss होने पर उसकी पूरी Cost Customer को Pay करनी होगी।</li>
+      <li>सिर्फ कॉल करके Event खत्म होने की जानकारी देने से जिम्मेदारी समाप्त नहीं होगी। अगले दिन 12:00 PM तक सामान की पूरी जिम्मेदारी Customer की होगी। Pickup से पहले किसी भी Damage या Loss की जिम्मेदारी Customer की ही होगी।</li>
+    </ul>
+    <label class="agree" for="agree"><input id="agree" type="checkbox"><span>Maine upar ki sharten padh li hain aur maan leta/leti hoon</span></label>
+    <div class="err" id="e_agree">Aage badhne ke liye sharten maanna zaroori hai</div>
+  </div>
+
+  <div class="ext">Dear Sir/Ma’am, for smooth decoration setup, kindly keep an extension board ready during the setup. ✨</div>
+</div>
+
+<div id="thanks">
+  <h1 id="thanksTitle">Booking mil gayi ✓</h1>
+  <p class="sub" id="thanksMsg">Hum jaldi hi aapse WhatsApp par baat karenge.</p>
+  <a id="backWa" href="#">WhatsApp par wapas jayein</a>
+  <button type="button" id="shareBtn" hidden>📤 Photos aur booking WhatsApp par bhejein</button><br>
+  <a id="textOnly" href="#" hidden>Sirf details text mein bhejein</a>
+  <div id="locRemind"><b>📍 Location abhi baaki hai</b><br>Hamari WhatsApp chat mein <b>📎 → Location → "Send your current location"</b> dabakar apni location bhej dein.</div>
+</div>
+</div>
+
+<div id="mapOv" hidden>
+  <div class="mtop"><button type="button" id="mapClose" aria-label="Band karein">✕</button><input id="mapQ" type="search" placeholder="Jagah ka naam ya area likhein"><button type="button" id="mapGo">Khojein</button></div>
+  <div id="mapBox"><div id="map"></div><div id="pin">📍</div></div>
+  <div class="mbot"><div class="hintline">Map ko khiskakar pin ko sahi jagah par laayein</div><button type="button" id="mapMe">Meri abhi ki location</button><button type="button" id="mapOk">Yahi location bhejein</button></div>
+</div>
+<div id="toast" hidden></div>
+<div class="bar" id="bar"><button type="button" id="sendBtn">Booking bhejein</button></div>
+
+<script>
+// ===== Yahan apni settings badlein =====
+var CONFIG = {
+  BUSINESS_WHATSAPP: "918766288491",   // country code ke saath, bina + ke
+  CRM_ENDPOINT: "",                    // CRM ka URL (baad mein). Khaali ho to booking WhatsApp message ban kar jayegi
+  PHOTO_MAX_PX: 1280,
+  PHOTO_QUALITY: 0.75
+};
+// =======================================
+
+var $ = function(id){return document.getElementById(id)};
+var state = {slot:"", package:"", mapsLink:"", files:[], lat:null, lng:null};
+
+// Link se: ?p=919876543210&lead=ABC123&b=2500  (number aur balance pehle se bhar jate hain)
+var qs = new URLSearchParams(location.search);
+var leadId = (qs.get("lead") || "").replace(/[^\w-]/g, "").slice(0, 64);
+
+var preBal = (qs.get("b") || "").replace(/[^\d]/g, "").slice(0, 7);
+if(preBal) $("balance").value = preBal;
+
+var d0 = new Date(); d0.setMinutes(d0.getMinutes()-d0.getTimezoneOffset());
+$("date").min = d0.toISOString().slice(0,10);
+
+// ---- chips ----
+document.querySelectorAll(".chips").forEach(function(group){
+  group.addEventListener("click", function(e){
+    var b = e.target.closest(".chip"); if(!b) return;
+    group.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed","false")});
+    b.setAttribute("aria-pressed","true"); state[group.dataset.single] = b.textContent;
+    var f = group.closest(".field"); if(f){ f.classList.remove("bad"); var er = f.querySelector(".err"); if(er) er.style.display = "none" }
+  });
+});
+
+// ---- phone helpers ----
+function digits10(v){
+  var x = String(v||"").replace(/\D/g,"");
+  if(x.length === 12 && x.indexOf("91") === 0) x = x.slice(2);
+  if(x.length === 11 && x.charAt(0) === "0") x = x.slice(1);
+  return /^[6-9]\d{9}$/.test(x) ? x : "";
+}
+
+// ---- location ----
+function locOk(){ return !!(state.mapsLink || $("locWa").checked) }
+function setLink(link, lat, lng){
+  state.mapsLink = link; state.lat = lat; state.lng = lng;
+  $("locBtn").textContent = "✓ Location lag gayi"; $("locBtn").classList.add("done");
+  $("locNote").innerHTML = 'Galat jagah ho to dusra tareeka chunein. <a href="' + link.replace(/"/g,"") + '" target="_blank" rel="noopener">Map par dekhein</a>';
+  $("f_loc").classList.remove("bad"); $("e_loc").style.display = "none";
+}
+function setLoc(lat, lng){
+  setLink("https://www.google.com/maps?q=" + lat.toFixed(6) + "," + lng.toFixed(6), lat, lng);
+  $("locLink").value = "";
+  fillAddr(lat, lng);
+}
+function fillAddr(lat, lng){
+  if($("addr").value.trim()) return;
+  fetch("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + lng)
+    .then(function(r){return r.json()})
+    .then(function(j){ if(j && j.display_name && !$("addr").value.trim()) $("addr").value = j.display_name })
+    .catch(function(){});
+}
+// koi bhi Google Maps / WhatsApp location link ya "lat,lng" samajh lo
+function parseLoc(t){
+  t = String(t||"").trim(); if(!t) return null;
+  var u = t.match(/https?:\/\/[^\s]+/i);
+  if(u && /(maps|goo\.gl|g\.co|share\.google|waze|openstreetmap)/i.test(u[0])) return u[0].replace(/[)\].,;]+$/,"");
+  var c = t.match(/(-?\d{1,2}\.\d{3,})\s*[,;\s]\s*(-?\d{1,3}\.\d{3,})/);
+  if(c) return "https://www.google.com/maps?q=" + c[1] + "," + c[2];
+  return null;
+}
+$("locLink").addEventListener("input", function(){
+  var v = this.value.trim();
+  if(!v){ if(state.mapsLink && !state.lat){ state.mapsLink = "" } return; }
+  var link = parseLoc(v);
+  if(link){ setLink(link, null, null); $("locNote").innerHTML = '✓ Link mil gaya. <a href="' + link.replace(/"/g,"") + '" target="_blank" rel="noopener">Map par dekhein</a>'; }
+  else { $("locNote").textContent = "Ye Google Maps ka link nahi lag raha. WhatsApp location ya Maps se 'Share' karke link paste karein."; }
+});
+function whyFail(e){
+  var tail = ' Neeche ke dusre tareeke try karein: <b>"WhatsApp se current location bhejein"</b>, link paste, ya address likh dein.';
+  if(!window.isSecureContext || location.protocol === "file:") return "⚠️ Ye page <b>https://</b> link se nahi khula hai, isliye phone location nahi dega." + tail;
+  if(/FBAN|FBAV|Instagram|; wv\)|Line\//i.test(navigator.userAgent)) return "⚠️ Ye link kisi app ke andar khula hai. Upar teen dot (⋮) dabakar <b>Chrome / Safari mein kholein</b>, phir dobara try karein." + tail;
+  if(e && e.code === 1) return "Location ki ijazat band hai. Address bar ke paas 🔒 ya ⓘ dabakar <b>Location = Allow</b> karein, phir dobara dabayein." + tail;
+  if(e && e.code === 2) return "Phone ki Location (GPS) band hai. Phone ki setting mein <b>Location ON</b> karein, phir dobara dabayein." + tail;
+  if(e && e.code === 3) return "Signal kamzor hai, location nahi mil payi. Dobara dabayein." + tail;
+  return "Location nahi mil payi." + tail;
+}
+function getPos(ok, fail){
+  if(!navigator.geolocation){ fail(null); return; }
+  navigator.geolocation.getCurrentPosition(ok, function(e){
+    if(e && e.code === 1){ fail(e); return; }
+    navigator.geolocation.getCurrentPosition(ok, fail, {enableHighAccuracy:false, timeout:20000, maximumAge:300000});
+  }, {enableHighAccuracy:true, timeout:10000, maximumAge:60000});
+}
+function showWaLocHelp(){ $("waLocHelp").hidden = false; $("locWaRow").hidden = false }
+$("locBtn").onclick = function(){
+  var btn = $("locBtn"); btn.textContent = "Location dhoondh rahe hain...";
+  getPos(function(p){ setLoc(p.coords.latitude, p.coords.longitude) }, function(e){
+    btn.textContent = "📍 Meri current location lagayein";
+    $("locNote").innerHTML = whyFail(e); showWaLocHelp();
+  });
+};
+// WhatsApp se location: chat khulti hai, customer 📎 > Location se bhejta hai
+$("waLocBtn").onclick = function(){
+  showWaLocHelp();
+  var url = "https://wa.me/" + CONFIG.BUSINESS_WHATSAPP + "?text=" + encodeURIComponent("Namaste, ye meri decoration ki location hai:");
+  var w = null; try{ w = window.open(url, "_blank") }catch(e){}
+  if(!w) location.href = url;
+};
+$("locWa").onchange = function(){
+  if(this.checked){ $("f_loc").classList.remove("bad"); $("e_loc").style.display = "none" }
+};
+function locateMe(){
+  getPos(function(p){ map.setView([p.coords.latitude, p.coords.longitude], 17) },
+         function(){ $("mapQ").placeholder = "Location nahi mili. Jagah ka naam likhein" });
+}
+var map = null;
+function loadLeaflet(cb){
+  if(window.L){ cb(true); return; }
+  var l = document.createElement("link"); l.rel = "stylesheet"; l.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"; document.head.appendChild(l);
+  var sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+  sc.onload = function(){ cb(true) }; sc.onerror = function(){ cb(false) };
+  document.head.appendChild(sc);
+}
+function showMap(){
+  $("mapOv").hidden = false;
+  if(!map){
+    map = L.map("map").setView(state.lat ? [state.lat, state.lng] : [28.46, 77.03], state.lat ? 17 : 11);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19, attribution:"© OpenStreetMap"}).addTo(map);
+    if(!state.lat) locateMe();
+  }
+  setTimeout(function(){ map.invalidateSize() }, 60);
+}
+$("locChange").onclick = function(){
+  $("locNote").textContent = "Map khul raha hai...";
+  loadLeaflet(function(ok){
+    if(!ok){ $("locNote").textContent = "Map load nahi hua. Link paste karein ya address likh dein."; return; }
+    $("locNote").textContent = ""; showMap();
+  });
+};
+$("mapClose").onclick = function(){ $("mapOv").hidden = true };
+$("mapMe").onclick = locateMe;
+$("mapGo").onclick = function(){
+  var q = $("mapQ").value.trim(); if(!q) return;
+  fetch("https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + encodeURIComponent(q))
+    .then(function(r){return r.json()})
+    .then(function(a){ if(a && a[0]) map.setView([+a[0].lat, +a[0].lon], 17); else alert("Ye jagah nahi mili. Dusra naam try karein.") })
+    .catch(function(){ alert("Khoj nahi ho payi. Map ko khiskakar pin lagayein.") });
+};
+$("mapQ").addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); $("mapGo").click() } });
+$("mapOk").onclick = function(){ var c = map.getCenter(); setLoc(c.lat, c.lng); $("mapOv").hidden = true };
+
+// ---- photos (har photo ke saath apna note) ----
+$("photos").onchange = function(e){
+  var skipped = 0;
+  Array.prototype.forEach.call(e.target.files, function(f){
+    if(state.files.length < 5){ var it = {file:f, note:"", out:null}; it.ready = compress(f).then(function(o){ it.out = o; return o }); state.files.push(it) } else skipped++;
+  });
+  e.target.value = ""; renderThumbs();
+  if(skipped){ var t = $("toast"); t.textContent = "Ek booking mein 5 tak photo ja sakti hain."; t.hidden = false; setTimeout(function(){ t.hidden = true }, 4000) }
+};
+function renderThumbs(){
+  var t = $("thumbs"); t.innerHTML = "";
+  state.files.forEach(function(item,i){
+    var card = document.createElement("div"); card.className = "pcard";
+    var pimg = document.createElement("div"); pimg.className = "pimg";
+    var img = document.createElement("img"); img.src = URL.createObjectURL(item.file);
+    var x = document.createElement("button"); x.type = "button"; x.textContent = "×"; x.setAttribute("aria-label","Photo hatayein");
+    x.onclick = function(){ state.files.splice(i,1); renderThumbs() };
+    pimg.appendChild(img); pimg.appendChild(x);
+    var pn = document.createElement("div"); pn.className = "pnote";
+    var lb = document.createElement("b"); lb.textContent = "Photo " + (i+1) + " mein kya change chahiye?";
+    var ta = document.createElement("textarea"); ta.value = item.note; ta.placeholder = "Jaise: colour pink karna hai. Kuch nahi badalna to khaali chhodein";
+    ta.oninput = function(){ item.note = ta.value };
+    pn.appendChild(lb); pn.appendChild(ta);
+    card.appendChild(pimg); card.appendChild(pn); t.appendChild(card);
+  });
+  $("photoBtn").textContent = state.files.length ? "➕ Doosri photo jodein (zaroori nahi)" : "🖼️ Photo chunein";
+  $("photoWrap").classList.toggle("sec", state.files.length > 0);
+  $("photoWrap").hidden = state.files.length >= 5;
+  $("descWrap").hidden = state.files.length > 0;
+}
+function compress(file){
+  return new Promise(function(resolve){
+    var img = new Image(), url = URL.createObjectURL(file);
+    img.onload = function(){
+      var max = CONFIG.PHOTO_MAX_PX, s = Math.min(1, max/Math.max(img.width,img.height));
+      var c = document.createElement("canvas"); c.width = Math.round(img.width*s); c.height = Math.round(img.height*s);
+      c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      c.toBlob(function(b){ URL.revokeObjectURL(url); resolve(b ? new File([b], file.name.replace(/\.\w+$/,"")+".jpg", {type:"image/jpeg"}) : file) }, "image/jpeg", CONFIG.PHOTO_QUALITY);
+    };
+    img.onerror = function(){ resolve(file) };
+    img.src = url;
+  });
+}
+
+// ---- validation: jo * wale hain wahi zaroori ----
+function mark(boxId, errId, ok){
+  var b = $(boxId), e = $(errId);
+  if(b) b.classList.toggle("bad", !ok);
+  if(e) e.style.display = ok ? "none" : "block";
+  return ok;
+}
+function validate(){
+  var a = digits10($("alt").value);
+  var checks = [
+        ["f_alt","e_alt", !!a],
+    ["f_date","e_date", !!$("date").value],
+    ["f_slot","e_slot", !!state.slot],
+    ["f_loc","e_loc", locOk() || !!$("addr").value.trim()],
+    ["f_agree","e_agree", $("agree").checked]
+  ];
+  var first = null;
+  checks.forEach(function(c){ var ok = mark(c[0], c[1], c[2]); if(!ok && !first) first = c[0] });
+  var t = $("toast");
+  if(first){
+    t.textContent = "Laal dabbe wali jaankari bharna zaroori hai."; t.hidden = false;
+    clearTimeout(window._tt); window._tt = setTimeout(function(){ t.hidden = true }, 6000);
+    $(first).scrollIntoView({behavior:"smooth",block:"center"});
+    return false;
+  }
+  t.hidden = true; return true;
+}
+["alt","date","addr"].forEach(function(id){ $(id).addEventListener("input", function(){ var f = $(id).closest(".field"); if(f) f.classList.remove("bad") }) });
+$("agree").onchange = function(){ if(this.checked){ $("f_agree").classList.remove("bad"); $("e_agree").style.display = "none" } };
+$("addr").addEventListener("input", function(){ if(this.value.trim()){ $("f_loc").classList.remove("bad"); $("e_loc").style.display = "none" } });
+
+// ---- message ----
+function fmtDate(v){ var p = v.split("-"); return p[2]+"/"+p[1]+"/"+p[0] }
+function fmtTime(v){ var p = v.split(":"), h = +p[0], ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return h + ":" + p[1] + " " + ap }
+function nowStamp(){ var n = new Date(); return n.toLocaleDateString("en-IN") + " " + n.toLocaleTimeString("en-IN",{hour:"2-digit",minute:"2-digit"}) }
+function buildText(attached){
+  var L = ["*Decoration Booking*"];
+  L.push("Doosra number: " + (digits10($("alt").value) || $("alt").value.trim()));
+  L.push("Event date: " + fmtDate($("date").value));
+  L.push("Team aane ka slot: " + state.slot);
+  if($("child").value.trim()) L.push("Decoration kiske liye: " + $("child").value.trim());
+  if($("age").value.trim()) L.push("Age: " + $("age").value.trim() + " saal");
+  if(state.files.length){
+    state.files.forEach(function(it,i){ if(it.note.trim()) L.push("Photo " + (i+1) + " mein change: " + it.note.trim()) });
+  } else if($("desc").value.trim()){
+    L.push("Decoration: " + $("desc").value.trim());
+  }
+  if($("addr").value.trim()) L.push("Address: " + $("addr").value.trim());
+  if(state.mapsLink) L.push("Location: " + state.mapsLink);
+  else if($("locWa").checked) L.push("Location: WhatsApp par alag se bhej rahi/raha hoon");
+  if($("balance").value.trim()) L.push("Balance amount: ₹" + $("balance").value.trim());
+  if($("remark").value.trim()) L.push("Remarks: " + $("remark").value.trim());
+  L.push("Sharten: maan li (" + nowStamp() + ")");
+  if(state.files.length) L.push("Photos: " + state.files.length + (attached ? " (saath mein attached)" : " (chat mein isi order mein bhej raha/rahi hoon)"));
+  return L.join("\n");
+}
+function waLink(text){ return "https://wa.me/" + CONFIG.BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(text) }
+
+function done(title, msg, btnLabel, link){
+  $("formView").style.display = "none"; $("bar").style.display = "none"; $("toast").hidden = true; $("thanks").style.display = "block";
+  $("shareBtn").hidden = true; $("textOnly").hidden = true; $("backWa").hidden = false;
+  $("thanksTitle").textContent = title; $("thanksMsg").textContent = msg; $("backWa").textContent = btnLabel; $("backWa").href = link;
+  $("locRemind").style.display = (!state.mapsLink && $("locWa").checked) ? "block" : "none";
+  window.scrollTo(0,0);
+}
+function doneShare(text, files){
+  done("Bas ek step baaki hai", "Neeche ka button dabayein, phir WhatsApp chunein aur hamari chat kholkar Send dabayein. Photos aur details ek saath chali jayengi.", "", waLink(text));
+  $("backWa").hidden = true;
+  var sb = $("shareBtn"); sb.hidden = false;
+  $("textOnly").hidden = false; $("textOnly").href = waLink(text);
+  sb.onclick = function(){
+    navigator.share({files:files, text:text}).catch(function(e){
+      if(e && e.name !== "AbortError"){
+        $("thanksMsg").textContent = "Is phone se photos share nahi ho payi. Neeche 'Sirf details text mein bhejein' dabayein, phir photos chat mein bhej dein.";
+        sb.hidden = true;
+      }
+    });
+  };
+}
+
+$("sendBtn").onclick = async function(){
+  if(!validate()) return;
+  var btn = this; btn.disabled = true; btn.textContent = "Bhej rahe hain...";
+  var text = buildText();
+
+  if(CONFIG.CRM_ENDPOINT){
+    try{
+      var fd = new FormData();
+      fd.append("lead_id", leadId); fd.append("source", "booking_form"); fd.append("submitted_at", new Date().toISOString());
+      fd.append("alt_phone", digits10($("alt").value));
+      fd.append("event_date", $("date").value); fd.append("team_arrival_time", state.slot); 
+      fd.append("decoration_note", $("desc").value.trim()); fd.append("photo_notes", JSON.stringify(state.files.map(function(it){return it.note.trim()})));
+      fd.append("child_name", $("child").value.trim()); fd.append("age", $("age").value.trim());
+      fd.append("address", $("addr").value.trim()); fd.append("maps_link", state.mapsLink); fd.append("location_via_whatsapp", $("locWa").checked ? "yes" : "");
+      fd.append("remark", $("remark").value.trim()); fd.append("balance_amount", $("balance").value.trim());
+      fd.append("terms_accepted", "yes"); fd.append("terms_accepted_at", new Date().toISOString()); fd.append("summary", text);
+      var files = await Promise.all(state.files.map(function(it){ return it.ready }));
+      files.forEach(function(f){ fd.append("photos", f, f.name) });
+      var ctl = new AbortController(); var to = setTimeout(function(){ ctl.abort() }, 25000);
+      var r = await fetch(CRM_ENDPOINT_URL(), {method:"POST", body:fd, signal:ctl.signal}); clearTimeout(to);
+      if(!r.ok) throw new Error("bad status");
+      done("Booking mil gayi ✓", "Aapki details aur photos hum tak pahunch gayi. Hum jaldi hi WhatsApp par confirm karenge.", "WhatsApp par wapas jayein", waLink("Namaste, maine booking form bhar diya hai."));
+      return;
+    }catch(err){ /* CRM na chale to WhatsApp wala raasta */ }
+  }
+
+  if(state.files.length && navigator.canShare){
+    var sfiles = await Promise.all(state.files.map(function(it){ return it.ready }));
+    var can = false; try{ can = navigator.canShare({files:sfiles}) }catch(e){}
+    if(can){
+      var stext = buildText(true);
+      try{
+        await navigator.share({files:sfiles, text:stext});
+        done("Dhanyavaad! 🎉", "Aapki booking WhatsApp se bhej di gayi hai. Hum jaldi aapse baat karenge.", "WhatsApp kholein", waLink("Namaste"));
+      }catch(e){
+        if(e && e.name === "AbortError"){
+          var tt = $("toast"); tt.textContent = "Booking abhi bheji nahi gayi. Dobara 'Booking bhejein' dabayein."; tt.hidden = false;
+          btn.disabled = false; btn.textContent = "Booking bhejein";
+        } else { doneShare(stext, sfiles); }
+      }
+      return;
+    }
+  }
+  var extra = state.files.length ? " Send karne ke baad apni photo bhi isi chat mein bhej dijiye." : "";
+  done("WhatsApp mein Send dabayein", "WhatsApp khul raha hai. Usme Send dabate hi booking hum tak pahunch jayegi." + extra, "WhatsApp nahi khula? Yahan dabayein", waLink(text));
+  window.location.href = waLink(text);
+};
+function CRM_ENDPOINT_URL(){ return CONFIG.CRM_ENDPOINT }
+</script>
+</body>
+</html>
