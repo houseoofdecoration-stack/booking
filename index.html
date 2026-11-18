@@ -106,9 +106,10 @@ input:focus,textarea:focus,button:focus-visible{outline:3px solid #e9a6cc;outlin
       <button type="button" class="chip" aria-pressed="false">6 se 8 ke beech <span class="xtra">(extra ₹200)</span></button>
     </div><div class="err" id="e_slot">Slot chunein</div></div>
 
-  <div class="field"><span class="lbl">Jo decoration chahiye uski photo</span>
+  <div class="field" id="f_photo"><span class="lbl">Jo decoration chahiye uski photo <span class="req">*</span></span>
     <label class="big" id="photoWrap"><span id="photoBtn">🖼️ Photo chunein</span><input id="photos" type="file" accept="image/*" multiple></label>
     <div id="thumbs"></div>
+    <div class="err" id="e_photo">Kam se kam ek photo chunein</div>
 </div></div>
 
   <div class="field"><label for="child">Jinka janam din hai ya jiska function hai, unka naam</label><input id="child" type="text" autocomplete="off">
@@ -259,7 +260,8 @@ function renderThumbs(){
     pn.appendChild(lb); pn.appendChild(ta);
     card.appendChild(pimg); card.appendChild(pn); t.appendChild(card);
   });
-  $("photoBtn").textContent = state.files.length ? "➕ Doosri photo jodein (zaroori nahi)" : "🖼️ Photo chunein";
+  $("photoBtn").textContent = state.files.length ? "➕ Aur photo jodein" : "🖼️ Photo chunein";
+  if(state.files.length && $("f_photo")){ $("f_photo").classList.remove("bad"); $("e_photo").style.display = "none" }
   $("photoWrap").classList.toggle("sec", state.files.length > 0);
   $("photoWrap").hidden = state.files.length >= 5;
 }
@@ -290,6 +292,7 @@ function validate(){
         ["f_alt","e_alt", !!a],
     ["f_date","e_date", !!$("date").value],
     ["f_slot","e_slot", !!state.slot],
+    ["f_photo","e_photo", state.files.length > 0],
     ["f_loc","e_loc", locOk() || !!$("addr").value.trim()],
     ["f_agree","e_agree", $("agree").checked]
   ];
