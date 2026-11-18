@@ -63,6 +63,7 @@ input:focus,textarea:focus,button:focus-visible{outline:3px solid #e9a6cc;outlin
 .agree input{width:24px;height:24px;flex:0 0 24px;margin:0;accent-color:var(--accent)}
 .ext{background:#fff3c4;border:1px solid #f0d56a;border-radius:14px;padding:14px;margin-bottom:12px;font-size:15px}
 #toast{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:40;max-width:496px;margin:0 auto;background:#b3261e;color:#fff;border-radius:12px;padding:12px 14px;font-size:15px;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.spin{display:inline-block;width:17px;height:17px;border:3px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .9s linear infinite;vertical-align:-3px;margin-right:9px}@keyframes sp{to{transform:rotate(360deg)}}
 .err{color:#b3261e;font-size:14px;margin-top:6px;display:none}
 .bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 70%,rgba(255,246,238,0))}
 .bar button{display:block;width:100%;max-width:520px;margin:0 auto;font:inherit;font-weight:700;font-size:18px;padding:16px;border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);cursor:pointer}
@@ -228,9 +229,9 @@ function getPos(ok, fail){
   }, {enableHighAccuracy:true, timeout:10000, maximumAge:60000});
 }
 $("locBtn").onclick = function(){
-  var btn = $("locBtn"); btn.textContent = "Location dhoondh rahe hain...";
+  var btn = $("locBtn"); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Location dhoondh rahe hain…';
   getPos(function(p){ setLoc(p.coords.latitude, p.coords.longitude) }, function(e){
-    btn.textContent = "📍 Meri current location lagayein";
+    btn.disabled = false; btn.textContent = "📍 Meri current location lagayein";
     $("locNote").innerHTML = whyFail(e);
   });
 };
@@ -268,49 +269,45 @@ function renderThumbs(){
 function loadImg(f){ return new Promise(function(res){ var im = new Image(), u = URL.createObjectURL(f);
   im.onload = function(){ URL.revokeObjectURL(u); res(im) }; im.onerror = function(){ URL.revokeObjectURL(u); res(null) }; im.src = u }) }
 // sab photos ek hi grid image mein (WhatsApp album jaisa), har photo par number
-// har photo par uska apna note likha jata hai
-function noteBar(x, cl, txt){
-  txt = String(txt||"").trim(); if(!txt) return;
-  var pad = 18, fs = Math.max(26, Math.round(cl.w/26)), lh = fs + 8;
-  x.font = "600 " + fs + "px sans-serif"; x.textAlign = "left"; x.textBaseline = "top";
-  var words = txt.split(/\s+/), lines = [], cur = "", i, t;
+// har photo ke neeche uska apna note, bade akshar mein
+function wrapTxt(x, txt, maxw, max){
+  var words = String(txt).trim().split(/\s+/), lines = [], cur = "", i, t;
   for(i=0;i<words.length;i++){ t = cur ? cur + " " + words[i] : words[i];
-    if(x.measureText(t).width > cl.w - pad*2 && cur){ lines.push(cur); cur = words[i]; if(lines.length === 3){ cur = ""; break } } else cur = t }
-  if(lines.length < 3 && cur) lines.push(cur);
-  var h = lines.length*lh + pad*2;
-  x.fillStyle = "rgba(0,0,0,.66)"; x.fillRect(cl.x, cl.y + cl.h - h, cl.w, h);
-  x.fillStyle = "#ffffff";
-  for(i=0;i<lines.length;i++) x.fillText(lines[i], cl.x + pad, cl.y + cl.h - h + pad + i*lh);
-}
+    if(x.measureText(t).width > maxw && cur){ lines.push(cur); cur = words[i]; if(lines.length >= max){ cur = ""; break } } else cur = t }
+  if(cur && lines.length < max) lines.push(cur); return lines }
 function gridImage(files, notes){
   var n = Math.min(files.length, 5); if(!n) return Promise.resolve(null);
   notes = notes || [];
   var hasNote = notes.slice(0,n).some(function(t){ return String(t||"").trim() });
   if(n < 2 && !hasNote) return Promise.resolve(files[0]);
   return Promise.all(files.slice(0,n).map(loadImg)).then(function(imgs){
-    var CELL = 760, GAP = 10, W, cells = [], y = 0, i = 0, h0;
-    if(n === 1){ var im0 = imgs[0]; W = 1100;
-      h0 = im0 ? Math.round(im0.height*(W/im0.width)) : 800; h0 = Math.max(420, Math.min(h0, 1500));
-      cells = [{x:0, y:0, w:W, h:h0}]; y = h0 + GAP;
-    } else { W = CELL*2 + GAP;
-      while(i < n){
-        if(n - i === 1){ cells.push({x:0, y:y, w:W, h:Math.round(CELL*0.72)}); y += Math.round(CELL*0.72) + GAP; i += 1 }
-        else { cells.push({x:0, y:y, w:CELL, h:CELL}); cells.push({x:CELL+GAP, y:y, w:CELL, h:CELL}); y += CELL + GAP; i += 2 }
-      } }
-    var H = y - GAP, c = document.createElement("canvas"); c.width = W; c.height = H;
+    var W = 1080, GAP = 14, FS = 50, LH = Math.round(FS*1.3), PAD = 24, MAXL = 3;
+    var PH = Math.max(520, Math.min(1080, Math.floor(3000/n)));
+    if(n === 1 && imgs[0]) PH = Math.max(600, Math.min(1400, Math.round(imgs[0].height*(W/imgs[0].width))));
+    var mc = document.createElement("canvas").getContext("2d"); mc.font = "700 " + FS + "px sans-serif";
+    var L = [], bh = [], H = GAP*(n-1), i;
+    for(i=0;i<n;i++){ var ls = String(notes[i]||"").trim() ? wrapTxt(mc, notes[i], W-PAD*2, MAXL) : [];
+      L.push(ls); var b = ls.length ? ls.length*LH + PAD*2 : 0; bh.push(b); H += PH + b }
+    var c = document.createElement("canvas"); c.width = W; c.height = H;
     var x = c.getContext("2d"); x.fillStyle = "#ffffff"; x.fillRect(0,0,W,H);
-    imgs.forEach(function(im, k){
-      var cl = cells[k]; if(!im || !cl) return;
-      var sc = Math.max(cl.w/im.width, cl.h/im.height), dw = im.width*sc, dh = im.height*sc;
-      x.save(); x.beginPath(); x.rect(cl.x, cl.y, cl.w, cl.h); x.clip();
-      x.drawImage(im, cl.x + (cl.w-dw)/2, cl.y + (cl.h-dh)/2, dw, dh); x.restore();
-      if(n > 1){ var r = 34, bx = cl.x + 18 + r, by = cl.y + 18 + r;
-        x.fillStyle = "rgba(0,0,0,.62)"; x.beginPath(); x.arc(bx, by, r, 0, Math.PI*2); x.fill();
-        x.fillStyle = "#fff"; x.font = "bold 40px sans-serif"; x.textAlign = "center"; x.textBaseline = "middle";
-        x.fillText(String(k+1), bx, by+2); }
-      noteBar(x, cl, notes[k]);
-    });
-    return new Promise(function(res){ c.toBlob(function(b){ res(b ? new File([b], "decoration.jpg", {type:"image/jpeg"}) : files[0]) }, "image/jpeg", 0.85) });
+    var y = 0;
+    for(var k=0;k<n;k++){ var im = imgs[k];
+      if(im){ var sc = Math.max(W/im.width, PH/im.height), dw = im.width*sc, dh = im.height*sc;
+        x.save(); x.beginPath(); x.rect(0,y,W,PH); x.clip();
+        x.drawImage(im, (W-dw)/2, y + (PH-dh)/2, dw, dh); x.restore(); }
+      else { x.fillStyle = "#e5e7eb"; x.fillRect(0,y,W,PH) }
+      if(n > 1){ var r = 38, bx = 24 + r, by = y + 24 + r;
+        x.fillStyle = "rgba(0,0,0,.65)"; x.beginPath(); x.arc(bx, by, r, 0, Math.PI*2); x.fill();
+        x.fillStyle = "#fff"; x.font = "bold 46px sans-serif"; x.textAlign = "center"; x.textBaseline = "middle";
+        x.fillText(String(k+1), bx, by+2) }
+      y += PH;
+      if(bh[k]){ x.fillStyle = "#111827"; x.fillRect(0, y, W, bh[k]);
+        x.fillStyle = "#ffffff"; x.font = "700 " + FS + "px sans-serif"; x.textAlign = "left"; x.textBaseline = "top";
+        for(var q=0;q<L[k].length;q++) x.fillText(L[k][q], PAD, y + PAD + q*LH);
+        y += bh[k] }
+      if(k < n-1) y += GAP;
+    }
+    return new Promise(function(res){ c.toBlob(function(b2){ res(b2 ? new File([b2], "decoration.jpg", {type:"image/jpeg"}) : files[0]) }, "image/jpeg", 0.85) });
   }).catch(function(){ return files[0] });
 }
 function compress(file){
