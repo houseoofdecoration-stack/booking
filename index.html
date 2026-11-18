@@ -265,6 +265,33 @@ function renderThumbs(){
   $("photoWrap").classList.toggle("sec", state.files.length > 0);
   $("photoWrap").hidden = state.files.length >= 5;
 }
+function loadImg(f){ return new Promise(function(res){ var im = new Image(), u = URL.createObjectURL(f);
+  im.onload = function(){ URL.revokeObjectURL(u); res(im) }; im.onerror = function(){ URL.revokeObjectURL(u); res(null) }; im.src = u }) }
+// sab photos ek hi grid image mein (WhatsApp album jaisa), har photo par number
+function gridImage(files){
+  var n = Math.min(files.length, 5);
+  if(n < 2) return Promise.resolve(files[0]);
+  var CELL = 760, GAP = 10, W = CELL*2 + GAP, cells = [], y = 0, i = 0;
+  while(i < n){
+    if(n - i === 1){ cells.push({x:0, y:y, w:W, h:Math.round(CELL*0.72)}); y += Math.round(CELL*0.72) + GAP; i += 1 }
+    else { cells.push({x:0, y:y, w:CELL, h:CELL}); cells.push({x:CELL+GAP, y:y, w:CELL, h:CELL}); y += CELL + GAP; i += 2 }
+  }
+  var H = y - GAP, c = document.createElement("canvas"); c.width = W; c.height = H;
+  var x = c.getContext("2d"); x.fillStyle = "#ffffff"; x.fillRect(0,0,W,H);
+  return Promise.all(files.slice(0,n).map(loadImg)).then(function(imgs){
+    imgs.forEach(function(im, k){
+      var cl = cells[k]; if(!im || !cl) return;
+      var sc = Math.max(cl.w/im.width, cl.h/im.height), dw = im.width*sc, dh = im.height*sc;
+      x.save(); x.beginPath(); x.rect(cl.x, cl.y, cl.w, cl.h); x.clip();
+      x.drawImage(im, cl.x + (cl.w-dw)/2, cl.y + (cl.h-dh)/2, dw, dh); x.restore();
+      var r = 34, bx = cl.x + 18 + r, by = cl.y + 18 + r;
+      x.fillStyle = "rgba(0,0,0,.62)"; x.beginPath(); x.arc(bx, by, r, 0, Math.PI*2); x.fill();
+      x.fillStyle = "#fff"; x.font = "bold 40px sans-serif"; x.textAlign = "center"; x.textBaseline = "middle";
+      x.fillText(String(k+1), bx, by+2);
+    });
+    return new Promise(function(res){ c.toBlob(function(b){ res(b ? new File([b], "decoration.jpg", {type:"image/jpeg"}) : files[0]) }, "image/jpeg", 0.85) });
+  }).catch(function(){ return files[0] });
+}
 function compress(file){
   return new Promise(function(resolve){
     var img = new Image(), url = URL.createObjectURL(file);
@@ -385,6 +412,7 @@ $("sendBtn").onclick = async function(){
 
   if(state.files.length && navigator.canShare){
     var sfiles = await Promise.all(state.files.map(function(it){ return it.ready }));
+    if(sfiles.length > 1){ try{ sfiles = [await gridImage(sfiles)] }catch(e){} }
     var can = false; try{ can = navigator.canShare({files:sfiles}) }catch(e){}
     if(can){
       var stext = buildText(true);
