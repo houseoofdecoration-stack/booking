@@ -93,7 +93,7 @@ input:focus,textarea:focus,button:focus-visible{outline:3px solid #e9a6cc;outlin
 
   <div class="field" id="f_date"><label for="date">Event ki date <span class="req">*</span></label><input id="date" type="date"><div class="err" id="e_date">Date chunein</div></div>
 
-  <div class="field" id="f_slot"><span class="lbl">Hamari team kitne baje aaye? <span class="req">*</span><span class="hint">Decoration shuru karne ka slot chunein</span></span>
+  <div class="field" id="f_slot"><span class="lbl">Hamari team kitne baje aaye? <span class="req">*</span></span>
     <div class="chips" data-single="slot">
       <button type="button" class="chip" aria-pressed="false">Subah 8 se 10 ke beech</button>
       <button type="button" class="chip" aria-pressed="false">10 se 12 ke beech</button>
@@ -103,7 +103,7 @@ input:focus,textarea:focus,button:focus-visible{outline:3px solid #e9a6cc;outlin
       <button type="button" class="chip" aria-pressed="false">6 se 8 ke beech <span class="xtra">(extra ₹200)</span></button>
     </div><div class="err" id="e_slot">Slot chunein</div></div>
 
-  <div class="field"><span class="lbl">Jo decoration chahiye uski photo<span class="hint">Ek photo kaafi hai. Kuch alag dikhana ho tabhi doosri photo jodein. Photo ke saamne likh sakte hain ki usme kya badalna hai</span></span>
+  <div class="field"><span class="lbl">Jo decoration chahiye uski photo</span>
     <label class="big" id="photoWrap"><span id="photoBtn">🖼️ Photo chunein</span><input id="photos" type="file" accept="image/*" multiple></label>
     <div id="thumbs"></div>
 </div></div>
@@ -111,14 +111,14 @@ input:focus,textarea:focus,button:focus-visible{outline:3px solid #e9a6cc;outlin
   <div class="field"><label for="child">Jinka janam din hai ya jiska function hai, unka naam</label><input id="child" type="text" autocomplete="off">
     <label for="age" style="margin-top:12px">Age (saal)</label><input id="age" type="number" inputmode="numeric" min="0" max="120"></div>
 
-  <div class="field" id="f_loc"><span class="lbl">Location <span class="req">*</span><span class="hint">Current location lagayein, ya sirf address likh dein</span></span>
+  <div class="field" id="f_loc"><span class="lbl">Location <span class="req">*</span></span>
     <button type="button" class="big" id="locBtn">📍 Meri current location lagayein</button>
     <div class="note" id="locNote"></div>
-    <label for="addr" style="margin-top:14px">Poora address<span class="hint">Flat / floor / landmark ke saath. Current location lagane par address apne aap bhar jata hai, aap badal sakte hain</span></label>
+    <label for="addr" style="margin-top:14px">Poora address</label>
     <textarea id="addr"></textarea>
     <div class="err" id="e_loc">Location lagayein ya poora address likhein</div></div>
 
-  <div class="field"><label for="balance">Balance amount (₹)<span class="hint">Event wale din jo baaki rakam deni hai</span></label><input id="balance" type="number" inputmode="numeric" min="0" placeholder="Jaise: 2000"></div>
+  <div class="field"><label for="balance">Balance amount (₹)</label><input id="balance" type="number" inputmode="numeric" min="0" placeholder="Jaise: 2000"></div>
 
   <div class="field"><label for="remark">Extra remarks (optional)</label><textarea id="remark"></textarea></div>
 
